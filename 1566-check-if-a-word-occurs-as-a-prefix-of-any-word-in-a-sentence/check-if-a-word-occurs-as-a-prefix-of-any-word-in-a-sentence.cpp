@@ -21,7 +21,11 @@ public:
                     }
                     else{
                         j=0;
-                        continue;
+                        while (i < n && sentence[i] != ' '){
+                            i++;
+                        }
+                        
+
                     }
                 }
             }else{
