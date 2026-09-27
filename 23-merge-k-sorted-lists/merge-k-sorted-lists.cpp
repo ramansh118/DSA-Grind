@@ -53,8 +53,7 @@ public:
         ListNode* ans=newhead;
         while(valid(lists)){
             ListNode* temp=mini(lists);
-            ListNode* newnext=new ListNode(temp->val);
-            newhead->next=newnext;
+            newhead->next=temp;
             newhead=newhead->next;
         }
         return ans;
