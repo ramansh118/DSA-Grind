@@ -1,34 +1,4 @@
 class Solution {
-     int binarysearch(vector<int>& nums,int low,int high){
-        int n=nums.size();
-        int mid=(low+high)/2;
-        if (low > high) {
-            return -1;
-        }
-        if (mid==0){
-            if (nums[mid]!=nums[mid+1]){
-                return nums[mid];
-            }else{
-                return -1;
-            }
-        }
-        if (mid==n-1){
-            if (nums[mid]!=nums[mid-1]){
-                return nums[mid];
-            }else{
-                return -1;
-            }
-        }
-        if (nums[mid]!=nums[mid-1] and nums[mid]!=nums[mid+1]){
-            return nums[mid];
-        }
-        int right =binarysearch(nums,low,mid-1);
-        if (right != -1){
-            return right;
-        }
-        return binarysearch(nums,mid+1,high);
-        
-    }
 public:
     int singleNonDuplicate(vector<int>& nums) {
         int n=nums.size();
@@ -37,8 +7,43 @@ public:
         }
         int low=0;
         int high=n-1;
-        int ans=binarysearch(nums,low,high);
-        return ans;
+        int mid=0;
+        while(low<=high){
+            mid=(low+high)/2;
+            if (mid==0){
+                if (nums[mid]!=nums[mid+1]){
+                    return nums[mid];
+                }
+            }
+            if (mid==n-1){
+                if (nums[mid]!=nums[mid-1]){
+                    return nums[mid];
+                }
+            }
+            
+            if (nums[mid]!=nums[mid-1] and nums[mid]!=nums[mid+1]){
+                return nums[mid];
+            }
+            if ( low!=mid-1 and nums[low]==nums[mid-1]){
+                low=mid+1;
+            }
+            if (high !=mid+1 and nums[high]==nums[mid+1]){
+                high=mid-1;
+            }
+            if ( low != n-1 and nums[low]==nums[low+1]){
+                low++;
+                if (low !=n-1){
+                    low++;
+                }
+            }
+            if ( high != 0 and nums[high]==nums[high-1]){
+                high--;
+                if (high !=0){
+                    high--;
+                }
+            }
+        }
+        return nums[mid];
         
     }
 };
